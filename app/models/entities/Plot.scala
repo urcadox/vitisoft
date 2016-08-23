@@ -2,13 +2,13 @@ package models.entities
 
 import java.util.UUID
 import java.time.OffsetDateTime
-import org.postgis._
+import play.api.libs.json._
 
 case class Plot (
   id: Plot.PlotID,
   userId: User.UserID,
   name: String,
-  position: PGgeometry,
+  position: JsValue, // {type: "Polygon", coordinates: [[x, y], [...]]}
   createdAt: OffsetDateTime
 )
 
