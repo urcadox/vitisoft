@@ -17,7 +17,8 @@ case class Plot (
   userId: User.UserID,
   name: String,
   position: JsValue, // {type: "Polygon", coordinates: [[x, y], [...]]}
-  createdAt: OffsetDateTime
+  createdAt: OffsetDateTime,
+  audits: List[PlotAudit]
 )
 
 object Plot {

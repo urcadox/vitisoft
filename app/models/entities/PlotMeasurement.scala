@@ -15,5 +15,6 @@ case class PlotMeasurement (
 
 object PlotMeasurement {
   type PlotMeasurementID = UUID
+  implicit val plotMeasurementFormat: OFormat[PlotMeasurement] = Json.format[PlotMeasurement]
 }
 
