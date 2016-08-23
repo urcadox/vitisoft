@@ -30,6 +30,7 @@ object Plot {
 trait PlotDAO {
   def getAll(): Future[List[Plot]]
   def getById(id: UUID): Future[Option[Plot]]
+  def update(id: UUID, plot: PlotInput): Future[Option[Plot]]
 }
 
 class PlotDAOMongoDB @Inject() (
@@ -45,4 +46,20 @@ class PlotDAOMongoDB @Inject() (
   def getById(id: UUID): Future[Option[Plot]] = {
     collection.find(Json.obj("id" -> id)).cursor[Plot]().headOption
   }
+
+  def update(id: UUID, plot: PlotInput): Future[Option[Plot]] = {
+    val findQuery = Json.obj("id" -> id)
+    val updateQuery = Json.obj("$set" -> Json.toJson(plot))
+    collection.update(findQuery, updateQuery).flatMap(result => this.getById(id))
+  }
+}
+
+case class PlotInput (
+  userId: User.UserID,
+  name: String,
+  position: JsValue,
+  audits: List[PlotAudit]
+)
+object PlotInput {
+  implicit val plotInputFormat: Format[PlotInput] = Json.format[PlotInput]
 }
