@@ -1,5 +1,11 @@
-@()(implicit request: Request[AnyContent])
+@import models.entities.Plot
+@(plots: List[Plot])(implicit request: Request[AnyContent])
 
 @main("Liste des parcelles") {
   <h2>Liste des parcelles</h2>
+  <ul>
+    @for(p <- plots) {
+      <li><a href="@routes.PlotController.plot(p.id)">@p.name</a></li>
+    }
+  </ul>
 }

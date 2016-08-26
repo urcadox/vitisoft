@@ -19,4 +19,6 @@ libraryDependencies ++= Seq(
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
+routesImport += "java.util.UUID"
+
 LessKeys.compress in Assets := true

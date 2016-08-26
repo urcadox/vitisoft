@@ -1,0 +1,12 @@
+@import models.entities.Plot
+@(plot: Plot)(implicit request: Request[AnyContent])
+
+@main("Parcelle : " + plot.name) {
+  <h2>Parcelle : @plot.name</h2>
+  <ul>
+    <li>ID du propriétaire : @plot.userId</li>
+    <li>Position : @plot.position.toString</li>
+    <li>Créée le : @plot.createdAt</li>
+    <li>@plot.audits.length audits</li>
+  </ul>
+}
