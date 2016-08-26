@@ -1,0 +1,16 @@
+@(title: String)(content: Html)(implicit request: Request[AnyContent])
+
+<html>
+  <head>
+    <title>@title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/all.css")">*@
+    @*<script src="@routes.Assets.at("javascripts/scripts.js")" type="text/javascript"></script>*@
+  </head>
+  <body>
+    <h1>Vitisoft</h1>
+    <div class="container">
+      @content
+    </div>
+  </body>
+</html>

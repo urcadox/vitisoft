@@ -7,8 +7,8 @@ import play.api.mvc._
 @Singleton
 class HomeController @Inject() extends Controller {
 
-  def index = Action {
-    Ok("Hello.")
+  def index = Action { implicit request =>
+    Ok(views.html.index())
   }
 
 }
