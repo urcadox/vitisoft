@@ -5,8 +5,40 @@
   <h2>Parcelle : @plot.name</h2>
   <ul>
     <li>ID du propriétaire : @plot.userId</li>
-    <li>Position : @plot.position.toString</li>
     <li>Créée le : @plot.createdAt</li>
     <li>@plot.audits.length audits</li>
   </ul>
+  <div class="map"></div>
+  <script>
+    function initMap() {
+      // Create a map object and specify the DOM element for display.
+      var map = new google.maps.Map(document.getElementsByClassName('map')[0], {});
+      var coordsRaw = @plot.position.toString;
+      var coords = coordsRaw.map(function(x) {
+        return {
+          lng: x[0],
+          lat: x[1]
+        };
+      });
+      var polygon = new google.maps.Polygon({
+        paths: coords,
+        strokeColor: '#00FF00',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#00AA00',
+        fillOpacity: 0.2
+      });
+      polygon.setMap(map);
+      var bounds = new google.maps.LatLngBounds();
+      polygon.getPaths().forEach(function(path) {
+        path.getArray().forEach(function(latlng) {
+          bounds.extend(latlng);
+        });
+      });
+      map.fitBounds(bounds);
+    }
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEYjdgW677brMTOWijhn6mVcq0r5taU8g&callback=initMap"
+  async defer></script>
 }
