@@ -1,7 +1,7 @@
 @import models.entities.Plot
 @(plot: Plot)(implicit request: Request[AnyContent])
 
-@main("Parcelle : " + plot.name) {
+@main("Parcelle : " + plot.name, views.Section.Plots) {
   <h2>Parcelle : @plot.name</h2>
   <ul>
     <li>ID du propriétaire : @plot.userId</li>

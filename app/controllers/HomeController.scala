@@ -8,7 +8,7 @@ import play.api.mvc._
 class HomeController @Inject() extends Controller {
 
   def index = Action { implicit request =>
-    Ok(views.html.index())
+    Redirect(routes.PlotController.plots())
   }
 
 }
