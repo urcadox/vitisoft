@@ -6,6 +6,31 @@ import play.api.libs.json._
 import play.api.data._
 import play.api.data.format.Formatter
 
+/**
+ * Provides a type class for useful enumerations
+ *
+ * @example
+ * {{{
+ *  import play.api.libs.json_
+ *  import play.api.data.format.Formatter
+ *  import scalaz.Enum
+ *
+ *  object foo {
+ *    sealed trait Foo
+ *    case object Bar     extends Foo
+ *    case object Foobar  extends Foo
+ *
+ *    val vs: Set[Foo] = Set(Bar, Foobar)
+ *
+ *    implicit val fooEnum: Enum[Foo] = enums.enumFromList(vs.toList)
+ *    implicit val fooReads: Reads[Foo] = enums.jsonReads(x => vs.find(v => v.toString == x))
+ *    implicit val fooWrites: Writes[Foo] = enums.jsonWrites(_.toString)
+ *    implicit val fooFormatter: Formatter[Foo] = enums.enumFormat[Foo](s =>
+ *      vs.find(_.toString == s)
+ *    )
+ *  }
+ * }}}
+ */
 object enums {
   def enumFromList[A](vs: List[A]): Enum[A] = {
     val size = vs.size

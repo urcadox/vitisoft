@@ -4,6 +4,9 @@ import java.util.UUID
 import java.time.LocalDate
 import play.api.libs.json._
 
+/**
+ * An audit of a plot, it's essentially a group of measurements
+ */
 case class PlotAudit (
   id: PlotAudit.PlotAuditID,
   userId: User.UserID,

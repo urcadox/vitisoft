@@ -13,6 +13,13 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext
 import userKinds._
 
+/**
+ * A user of the application
+ *
+ * @param passwordHash  the user's password, hashed with bcrypt
+ * @param kind          the user's role, see [[models.entities.userKinds]]
+ * @see [[models.entities.userKinds]]
+ */
 case class User (
   id: User.UserID,
   email: String,

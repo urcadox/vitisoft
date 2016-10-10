@@ -5,6 +5,9 @@ import play.api.data.format.Formatter
 import models.enums
 import scalaz.Enum
 
+/**
+ * Enumeration holding measurable items
+ */
 object measuredItems {
   sealed trait MeasuredItem
   case object Temperature    extends MeasuredItem

@@ -12,6 +12,9 @@ import reactivemongo.play.json.collection._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext
 
+/**
+ * A plot of land (french: Parcelle)
+ */
 case class Plot (
   id: Plot.PlotID,
   userId: User.UserID,
@@ -54,6 +57,9 @@ class PlotDAOMongoDB @Inject() (
   }
 }
 
+/**
+ * User input for a plot
+ */
 case class PlotInput (
   userId: User.UserID,
   name: String,
