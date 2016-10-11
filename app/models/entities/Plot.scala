@@ -20,6 +20,7 @@ case class Plot (
   userId: User.UserID,
   name: String,
   position: JsValue, // {type: "Polygon", coordinates: [[x, y], [...]]}
+  pictureUrl: Option[String],
   createdAt: OffsetDateTime,
   audits: List[PlotAudit]
 )
@@ -64,6 +65,7 @@ case class PlotInput (
   userId: User.UserID,
   name: String,
   position: JsValue,
+  pictureUrl: Option[String],
   audits: List[PlotAudit]
 )
 object PlotInput {

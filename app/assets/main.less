@@ -11,6 +11,40 @@ body {
   }
 }
 
+.plot-list-item {
+  border: solid 1px #C3C3C3;
+  border-radius: 2px;
+  padding: 20px;
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.15);
+  margin-bottom: 10px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.015);
+    box-shadow: none;
+    border-color: #555555;
+  }
+  &:active {
+    box-shadow: inset 0 0 8px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+  a h3 {
+    color: initial;
+  }
+  a:hover h3 {
+    color: initial;
+    text-decoration: none !important;
+  }
+}
+
+.thumbnail {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+}
+
 .map {
   height: 400px;
 }

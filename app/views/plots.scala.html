@@ -2,10 +2,16 @@
 @(plots: List[Plot])(implicit request: Request[AnyContent])
 
 @main("Liste des parcelles", views.Section.Plots) {
-  <h2>Liste des parcelles</h2>
-  <ul>
-    @for(p <- plots) {
-      <li><a href="@routes.PlotController.plot(p.id)">@p.name</a></li>
-    }
-  </ul>
+  @for(p <- plots) {
+    <div class="col-md-4 col-sm-6">
+      <div class="plot-list-item">
+        <a href="@routes.PlotController.plot(p.id)">
+          <div class="thumbnail" style="background-image: url(@p.pictureUrl.getOrElse(routes.Assets.versioned("img/default-picture.png")))"></div>
+          <div class="caption">
+            <h3>@p.name</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  }
 }
