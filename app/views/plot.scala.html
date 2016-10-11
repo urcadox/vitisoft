@@ -2,13 +2,11 @@
 @(plot: Plot)(implicit request: Request[AnyContent])
 
 @main("Parcelle : " + plot.name, views.Section.Plots) {
-  <h2>Parcelle : @plot.name</h2>
-  <ul>
-    <li>ID du propriétaire : @plot.userId</li>
-    <li>Créée le : @plot.createdAt</li>
-    <li>@plot.audits.length audits</li>
-  </ul>
-  <div class="map"></div>
+  <h2>@plot.name</h2>
+  <div class="row">
+     <div class="plot-image col-md-6" style="background-image: url(@plot.pictureUrl.getOrElse(routes.Assets.versioned("img/default-picture.png")))"></div>
+    <div class="map col-md-6"></div>
+  </div>
   <script>
     function initMap() {
       // Create a map object and specify the DOM element for display.
