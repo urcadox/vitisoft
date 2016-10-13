@@ -7,6 +7,15 @@
      <div class="plot-image col-md-6" style="background-image: url(@plot.pictureUrl.getOrElse(routes.Assets.versioned("img/default-picture.png")))"></div>
     <div class="map col-md-6"></div>
   </div>
+  <h3>Audits</h3>
+  @for(a <- plot.audits) {
+    <div class="plot-audit">
+      <h4>Le @a.date.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))</h4>
+      <p>
+        @a.measurements.length mesures
+      </p>
+    </div>
+  }
   <script>
     function initMap() {
       // Create a map object and specify the DOM element for display.
