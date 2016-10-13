@@ -11,4 +11,12 @@ class HomeController @Inject() extends Controller {
     Redirect(routes.PlotController.plots())
   }
 
+  def login = Action { implicit request =>
+    Ok(views.html.login())
+  }
+
+  def sendLoginForm = Action { implicit request =>
+    Redirect(routes.HomeController.index())
+  }
+
 }

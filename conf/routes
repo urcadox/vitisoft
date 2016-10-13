@@ -3,6 +3,8 @@
 # ~~~~
 
 GET     /                           controllers.HomeController.index
+GET     /login                      controllers.HomeController.login
+POST    /sessions                   controllers.HomeController.sendLoginForm
 
 GET     /plots                      controllers.PlotController.plots
 GET     /plots/:id                  controllers.PlotController.plot(id: UUID)
