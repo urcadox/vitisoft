@@ -4,7 +4,7 @@
 @main("Liste des parcelles", views.Section.Plots) {
   @for(p <- plots) {
     <div class="col-md-4 col-sm-6">
-      <div class="plot-list-item">
+      <div class="plot-list-item list-grid-item">
         <a href="@routes.PlotController.plot(p.id)">
           <div class="thumbnail" style="background-image: url(@p.pictureUrl.getOrElse(routes.Assets.versioned("img/default-picture.png")))"></div>
           <div class="caption">
