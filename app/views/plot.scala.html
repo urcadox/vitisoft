@@ -1,4 +1,6 @@
 @import models.entities.Plot
+@import play.api.libs.json.Json
+@import models.entities.measuredItems._
 @(plot: Plot)(implicit request: Request[AnyContent])
 
 @main("Parcelle : " + plot.name, views.Section.Plots) {
@@ -8,7 +10,7 @@
     <div class="map col-md-7 col-sm-8"></div>
   </div>
   <h3>Audits</h3>
-  @for(a <- plot.audits) {
+  @for(a <- plot.sortedAudits.reverse) {
     <div class="plot-audit col-md-3 col-sm-4 col-xs-6">
       <div class="inner list-grid-item">
         <a href="@routes.PlotController.audit(plot.id, a.id)">
@@ -20,6 +22,11 @@
       </div>
     </div>
   }
+  <div class="clear"></div>
+  <div class="charts">
+    <div class="plot-chart plot-chart-temperature col-md-6"></div>
+    <div class="plot-chart plot-chart-humidity col-md-6"></div>
+  </div>
   <script>
     function initMap() {
       // Create a map object and specify the DOM element for display.
@@ -52,4 +59,66 @@
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEYjdgW677brMTOWijhn6mVcq0r5taU8g&callback=initMap"
   async defer></script>
+  <script>
+		$(function () {
+      $('.plot-chart-temperature').highcharts({
+        chart: {
+          type: 'line'
+        },
+        title: {
+          text: 'Température'
+        },
+        yAxis: {
+          title: {
+            text: 'Température (°C)'
+          }
+        },
+        xAxis: {
+          categories: @Html(Json.toJson(plot.sortedAudits.map(_.date.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")))).toString)
+        },
+        plotOptions: {
+          line: {
+            dataLabels: {
+              enabled: true
+            }
+          }
+        },
+        series: [{
+          name: '@plot.name',
+          data: @Json.toJson(plot.sortedAudits.flatMap(_.measurements).filter(_.item == Temperature).map(_.value.as[String]).map(x => Integer.parseInt(x)))
+        }]
+      });
+		});
+  </script>
+  <script>
+		$(function () {
+      $('.plot-chart-humidity').highcharts({
+        chart: {
+          type: 'line'
+        },
+        title: {
+          text: 'Taux d\'humidité'
+        },
+        yAxis: {
+          title: {
+            text: 'Taux d\'humidité (%)'
+          }
+        },
+        xAxis: {
+          categories: @Html(Json.toJson(plot.sortedAudits.map(_.date.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")))).toString)
+        },
+        plotOptions: {
+          line: {
+            dataLabels: {
+              enabled: true
+            }
+          }
+        },
+        series: [{
+          name: '@plot.name',
+          data: @Json.toJson(plot.sortedAudits.flatMap(_.measurements).filter(_.item == Humidity).map(_.value.as[String]).map(x => Integer.parseInt(x)))
+        }]
+      });
+		});
+  </script>
 }

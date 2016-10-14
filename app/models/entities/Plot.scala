@@ -23,7 +23,9 @@ case class Plot (
   pictureUrl: Option[String],
   createdAt: OffsetDateTime,
   audits: List[PlotAudit]
-)
+) {
+  def sortedAudits = audits.sortBy(_.date.toString)
+}
 
 object Plot {
   type PlotID = UUID
