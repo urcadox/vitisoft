@@ -15,14 +15,14 @@ class PlotAPIController @Inject() (
 
   def plots = Action.async { implicit request =>
     plotDAO.getAll map { plots =>
-      Ok(Json.toJson(plots))
+      Ok(Json.toJson(plots.map(p => p.copy(audits = p.sortedAudits.reverse))))
     }
   }
 
   def plot(id: Plot.PlotID) = Action.async { implicit request =>
     plotDAO.getById(id) map { plotOption =>
       plotOption map { plot =>
-        Ok(Json.toJson(plot))
+        Ok(Json.toJson(plot.copy(audits = plot.sortedAudits.reverse)))
       } getOrElse NotFound
     }
   }
