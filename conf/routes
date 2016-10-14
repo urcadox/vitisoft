@@ -8,6 +8,7 @@ POST    /sessions                   controllers.HomeController.sendLoginForm
 
 GET     /plots                      controllers.PlotController.plots
 GET     /plots/:id                  controllers.PlotController.plot(id: UUID)
+GET     /plots/:id/audits/:auditId  controllers.PlotController.audit(id: UUID, auditId: UUID)
 
 
 GET     /api/plots                  controllers.api.PlotAPIController.plots

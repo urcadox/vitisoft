@@ -14,7 +14,17 @@ case class PlotMeasurement (
   item: MeasuredItem,
   value: JsValue,
   timestamp: OffsetDateTime
-)
+) {
+  def display() = {
+    val v = value.as[String]
+    item match {
+      case Temperature => s"$v °C"
+      case Humidity => s"$v %"
+      case Pesticide => s"$v %"
+      case _ => v
+    }
+  }
+}
 
 object PlotMeasurement {
   type PlotMeasurementID = UUID

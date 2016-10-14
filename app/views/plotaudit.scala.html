@@ -1,0 +1,13 @@
+@import models.entities.Plot
+@import models.entities.PlotAudit
+@(plot: Plot, audit: PlotAudit)(implicit request: Request[AnyContent], messages: Messages)
+
+@main("Audit du " + audit.date.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")), views.Section.Audits) {
+  <h2>@plot.name</h2>
+  <h3>Audit du @audit.date.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))</h3>
+
+  @for(m <- audit.measurements) {
+    <h4>@Messages("measureditems." + m.item.toString())</h4>
+    <p>@m.display()</p>
+  }
+}
