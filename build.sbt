@@ -1,4 +1,4 @@
-name := """vitisoft"""
+name := """wineplotstracker"""
 
 version := "1.0-SNAPSHOT"
 
